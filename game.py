@@ -69,7 +69,7 @@ class SoundButton():
                         man.left = False
                 elif event.key == pygame.K_RIGHT:
                         man.right = False
-                if menu_open and event.key==pygame.K_m:
+                if menu_open and event.key==pygame.K_t:
                     mus_file=input("Enter your music file path: \n")
                     
                     if os.path.isfile(mus_file):
@@ -700,7 +700,8 @@ while(run):
             
                 
             redrawGameWindow()
-                
+            if countdown==0 or lives==0:
+                game_lost=True
             #check for key presses and move accordingly avoiding collision with walls
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT] and man.x>0 and notWall('left'):
@@ -795,7 +796,7 @@ while(run):
             menu.open_menu(win)
             draw_text("LOST IN HELL",header_font,(237,188,74),425,50)
             draw_text("Dont't like the music?",text_font,(237,188,74),800,900)
-            draw_text("Press M to change it",text_font,(237,188,74),800,930)  
+            draw_text("Press T to change it",text_font,(237,188,74),800,930)  
             if menu.playing==True:
                 lvl_open=True
                 menu_open=False
@@ -962,6 +963,7 @@ while(run):
         elif game_lost==True:
             los_img=pygame.transform.scale(pygame.image.load('images/entry.jpg'),(Settings.win_width,Settings.win_height))
             win.blit(los_img,(0,0))
+            print("lost")
             draw_text("press space to play again",text_font,(235,150,228),450,450)
             draw_text("GAME OVER",text_font2,(237,196,100),500,320)
             draw_text("Press M for main menu",text_font,(235,150,228),450,510)
